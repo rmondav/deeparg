@@ -39,7 +39,8 @@ def predict(args):
                         '--id', str(args.arg_alignment_identity),
                         '--sensitive',
                         '-e', str(args.arg_alignment_evalue),
-                        '-a', args.output_file+'.align'
+                        '-a', args.output_file+'.align',
+                        '-q', str(args.threads)
                         ])
     logger.info('Running: {}'.format(cmd))
     os.system(cmd)
@@ -111,6 +112,8 @@ def main():
                        help='Identity cutoff for sequence alignment in percent [Default: 50]')
     reads.add_argument('--arg-alignment-evalue', default=1e-10, type=float,
                        help='Evalue cutoff [Default: 1e-10]')
+    reads.add_argument('-q', '--threads', default=12, type=int,
+                       help='no. of threads [Default: 12]')
     reads.add_argument('--arg-alignment-overlap', default=0.8, type=float,
                        help='Alignment overlap cutoff between read and genes [Default: 0.8]')
     reads.add_argument('--arg-num-alignments-per-entry', default=1000, type=int,
